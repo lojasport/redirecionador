@@ -24,7 +24,7 @@
             overflow: hidden;
         }
 
-        /* Slideshow com as suas 7 fotos */
+        /* Slideshow com as suas fotos */
         .bg-slideshow {
             position: fixed;
             top: 0;
@@ -44,7 +44,6 @@
             animation: fadeSlide 28s infinite;
         }
 
-        /* Mapeamento das suas fotos enviadas */
         .slide:nth-child(1) {
             background-image: url('1.jpeg');
             animation-delay: 0s;
@@ -107,6 +106,43 @@
             z-index: -1;
         }
 
+        /* Contador Online no Topo */
+        .online-header {
+            position: fixed;
+            top: 15px;
+            background: rgba(0, 0, 0, 0.7);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 8px 15px;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            backdrop-filter: blur(10px);
+            z-index: 10;
+        }
+
+        .dot-live {
+            width: 8px;
+            height: 8px;
+            background: #25d366;
+            border-radius: 50%;
+            box-shadow: 0 0 8px #25d366;
+            animation: blinkLive 1.5s infinite;
+        }
+
+        @keyframes blinkLive {
+
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0.3;
+            }
+        }
+
         .container {
             text-align: center;
             padding: 30px 20px;
@@ -118,9 +154,9 @@
             border: 1px solid rgba(255, 255, 255, 0.2);
             border-radius: 30px;
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+            z-index: 1;
         }
 
-        /* Contador de 60 segundos */
         .timer-box {
             background: rgba(0, 0, 0, 0.6);
             padding: 15px;
@@ -147,7 +183,6 @@
             }
         }
 
-        /* Botão com transição de cor */
         .btn-pulsar {
             display: flex;
             align-items: center;
@@ -170,17 +205,56 @@
         }
 
         @keyframes pulsar {
-            0% {
+
+            0%,
+            100% {
                 transform: scale(1);
             }
 
             70% {
                 transform: scale(1.03);
             }
+        }
 
-            100% {
-                transform: scale(1);
-            }
+        /* Pop-up de Prova Social (Apenas Masculino) */
+        #social-proof {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            background: white;
+            color: #333;
+            padding: 10px 15px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            transform: translateX(-150%);
+            transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            z-index: 1000;
+            width: 280px;
+        }
+
+        #social-proof.show {
+            transform: translateX(0);
+        }
+
+        #social-proof img {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid #25d366;
+        }
+
+        .proof-info {
+            font-size: 0.8rem;
+            text-align: left;
+        }
+
+        .proof-info b {
+            color: #128c7e;
+            font-size: 0.9rem;
         }
 
         .footer-text {
@@ -193,11 +267,16 @@
 
 <body>
 
+    <div class="online-header">
+        <div class="dot-live"></div>
+        <span id="online-users">384</span> pessoas visualizando este convite
+    </div>
+
     <div class="bg-slideshow">
         <div class="slide"></div>
         <div class="slide"></div>
-        <div class="slide"></div>
-        <div class="slide"></div>
+        <div class="slide)</div>
+        <div class=" slide"></div>
         <div class="slide"></div>
         <div class="slide"></div>
         <div class="slide"></div>
@@ -212,40 +291,37 @@
             <div id="countdown">01:00</div>
         </div>
 
-        <p style="margin-bottom: 25px;">Não perca a chance de entrar no grupo e ter acesso a conteúdos exclusivos.
-            O convite será invalidado quando o cronômetro zerar.</p>
+        <p style="margin-bottom: 25px;">O convite será invalidado quando o cronômetro zerar. Garanta sua vaga no grupo
+            VIP.</p>
 
-        <a href="https://t.me/julliana_bonde_bot" class="btn-pulsar" id="action-btn">
-            <i class="fab fa-whatsapp"></i>
-            ENTRAR NO GRUPO
+        <a href="SEU_LINK_AQUI" class="btn-pulsar" id="action-btn">
+            <i class="fab fa-whatsapp"></i> ENTRAR NO GRUPO
         </a>
 
         <div class="footer-text">© 2026 • Acesso Privado e Seguro</div>
     </div>
 
+    <div id="social-proof">
+        <img src="" id="proof-img" alt="Avatar">
+        <div class="proof-info">
+            <b id="proof-name">Nome</b>
+            <p>acabou de entrar no grupo</p>
+        </div>
+    </div>
+
     <script>
+        // Função do Cronômetro
         function startTimer(duration, display, btn) {
             let timer = duration, minutes, seconds;
             let interval = setInterval(function () {
                 minutes = parseInt(timer / 60, 10);
                 seconds = parseInt(timer % 60, 10);
-
-                minutes = minutes < 10 ? "0" + minutes : minutes;
-                seconds = seconds < 10 ? "0" + seconds : seconds;
-
-                display.textContent = minutes + ":" + seconds;
-
-                // Alerta visual aos 30 segundos
-                if (timer <= 30) {
-                    display.classList.add('urgency-blink');
-                }
-
-                // Botão muda para vermelho aos 15 segundos
+                display.textContent = (minutes < 10 ? "0" + minutes : minutes) + ":" + (seconds < 10 ? "0" + seconds : seconds);
+                if (timer <= 30) display.classList.add('urgency-blink');
                 if (timer <= 15) {
                     btn.classList.add('btn-danger');
                     btn.innerHTML = '<i class="fas fa-exclamation-triangle"></i> ENTRAR AGORA!';
                 }
-
                 if (--timer < 0) {
                     clearInterval(interval);
                     display.textContent = "00:00";
@@ -256,27 +332,42 @@
             }, 1000);
         }
 
+        // Lógica do Contador Online
+        let onlineCount = 384;
+        setInterval(() => {
+            onlineCount += Math.floor(Math.random() * 5) - 2;
+            document.getElementById('online-users').innerText = onlineCount;
+        }, 3500);
+
+        // Lógica de Prova Social (Apenas Homens)
+        const leads = [
+            { n: "Ricardo Almeida", i: "https://xsgames.co/randomusers/assets/avatars/male/1.jpg" },
+            { n: "Marcos Vinícius", i: "https://xsgames.co/randomusers/assets/avatars/male/2.jpg" },
+            { n: "Thiago Soares", i: "https://xsgames.co/randomusers/assets/avatars/male/3.jpg" },
+            { n: "Felipe Mendes", i: "https://xsgames.co/randomusers/assets/avatars/male/7.jpg" },
+            { n: "Gustavo Rocha", i: "https://xsgames.co/randomusers/assets/avatars/male/5.jpg" },
+            { n: "Lucas Oliveira", i: "https://xsgames.co/randomusers/assets/avatars/male/8.jpg" },
+            { n: "Bruno Henrique", i: "https://xsgames.co/randomusers/assets/avatars/male/12.jpg" }
+        ];
+
+        function showProof() {
+            const lead = leads[Math.floor(Math.random() * leads.length)];
+            document.getElementById('proof-name').innerText = lead.n;
+            document.getElementById('proof-img').src = lead.i;
+
+            const popup = document.getElementById('social-proof');
+            popup.classList.add('show');
+            setTimeout(() => popup.classList.remove('show'), 4000);
+
+            setTimeout(showProof, Math.floor(Math.random() * 7000) + 7000);
+        }
+
         window.onload = function () {
-            let sixtySeconds = 60;
-            let display = document.querySelector('#countdown');
-            let btn = document.querySelector('#action-btn');
-            startTimer(sixtySeconds, display, btn);
+            startTimer(60, document.querySelector('#countdown'), document.querySelector('#action-btn'));
+            setTimeout(showProof, 3000);
         };
     </script>
-     <!-- TikTok Pixel Code Start -->
-<script>
-!function (w, d, t) {
-  w.TiktokAnalyticsObject=t;var ttq=w[t]=w[t]||[];ttq.methods=["page","track","identify","instances","debug","on","off","once","ready","alias","group","enableCookie","disableCookie","holdConsent","revokeConsent","grantConsent"],ttq.setAndDefer=function(t,e){t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}};for(var i=0;i<ttq.methods.length;i++)ttq.setAndDefer(ttq,ttq.methods[i]);ttq.instance=function(t){for(
-var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n]);return e},ttq.load=function(e,n){var r="https://analytics.tiktok.com/i18n/pixel/events.js",o=n&&n.partner;ttq._i=ttq._i||{},ttq._i[e]=[],ttq._i[e]._u=r,ttq._t=ttq._t||{},ttq._t[e]=+new Date,ttq._o=ttq._o||{},ttq._o[e]=n||{};n=document.createElement("script")
-;n.type="text/javascript",n.async=!0,n.src=r+"?sdkid="+e+"&lib="+t;e=document.getElementsByTagName("script")[0];e.parentNode.insertBefore(n,e)};
 
-
-  ttq.load('D6KOCQRC77UDVRSEIITG');
-  ttq.page();
-}(window, document, 'ttq');
-</script>
-<!-- TikTok Pixel Code End -->
-        
 </body>
 
 </html>
