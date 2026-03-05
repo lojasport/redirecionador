@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Acesso Exclusivo | Grupo VIP</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background-color: #000;
+            color: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow: hidden;
+        }
+
+        /* Slideshow com as suas 7 fotos */
+        .bg-slideshow {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+        }
+
+        .slide {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            opacity: 0;
+            animation: fadeSlide 28s infinite;
+        }
+
+        /* Mapeamento das suas fotos enviadas */
+        .slide:nth-child(1) {
+            background-image: url('1.jpeg');
+            animation-delay: 0s;
+        }
+
+        .slide:nth-child(2) {
+            background-image: url('2.jpeg');
+            animation-delay: 4s;
+        }
+
+        .slide:nth-child(3) {
+            background-image: url('3.jpeg');
+            animation-delay: 8s;
+        }
+
+        .slide:nth-child(4) {
+            background-image: url('4.jpeg');
+            animation-delay: 12s;
+        }
+
+        .slide:nth-child(5) {
+            background-image: url('5.jpeg');
+            animation-delay: 16s;
+        }
+
+        .slide:nth-child(6) {
+            background-image: url('6.jpg');
+            animation-delay: 20s;
+        }
+
+        .slide:nth-child(7) {
+            background-image: url('7.jpg');
+            animation-delay: 24s;
+        }
+
+        @keyframes fadeSlide {
+
+            0%,
+            100% {
+                opacity: 0;
+            }
+
+            5%,
+            14% {
+                opacity: 1;
+            }
+
+            19% {
+                opacity: 0;
+            }
+        }
+
+        .bg-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(0deg, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0.4) 100%);
+            z-index: -1;
+        }
+
+        .container {
+            text-align: center;
+            padding: 30px 20px;
+            max-width: 400px;
+            width: 90%;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 30px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+        }
+
+        /* Contador de 60 segundos */
+        .timer-box {
+            background: rgba(0, 0, 0, 0.6);
+            padding: 15px;
+            border-radius: 20px;
+            margin-bottom: 25px;
+            border: 2px solid #ff4d4d;
+        }
+
+        #countdown {
+            font-size: 3rem;
+            font-weight: 800;
+            font-family: monospace;
+            color: #fff;
+        }
+
+        .urgency-blink {
+            animation: blink 1s infinite;
+        }
+
+        @keyframes blink {
+            50% {
+                opacity: 0.5;
+                color: #ff0000;
+            }
+        }
+
+        /* Botão com transição de cor */
+        .btn-pulsar {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            background: #25d366;
+            color: white;
+            padding: 22px;
+            font-size: 1.3rem;
+            font-weight: bold;
+            text-decoration: none;
+            border-radius: 18px;
+            transition: background-color 0.5s ease;
+            animation: pulsar 1.5s infinite;
+        }
+
+        .btn-danger {
+            background-color: #ff3333 !important;
+            box-shadow: 0 0 20px rgba(255, 51, 51, 0.6);
+        }
+
+        @keyframes pulsar {
+            0% {
+                transform: scale(1);
+            }
+
+            70% {
+                transform: scale(1.03);
+            }
+
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        .footer-text {
+            margin-top: 20px;
+            font-size: 0.7rem;
+            color: rgba(255, 255, 255, 0.3);
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="bg-slideshow">
+        <div class="slide"></div>
+        <div class="slide"></div>
+        <div class="slide"></div>
+        <div class="slide"></div>
+        <div class="slide"></div>
+        <div class="slide"></div>
+        <div class="slide"></div>
+    </div>
+    <div class="bg-overlay"></div>
+
+    <div class="container">
+        <h1 style="font-size: 1.8rem; margin-bottom: 10px;">ÚLTIMAS VAGAS🔥</h1>
+
+        <div class="timer-box">
+            <div style="font-size: 0.8rem; color: #ff4d4d; font-weight: bold;">EXPIRA EM:</div>
+            <div id="countdown">01:00</div>
+        </div>
+
+        <p style="margin-bottom: 25px;">Não perca a chance de entrar no grupo e ter acesso a conteúdos exclusivos.
+            O convite será invalidado quando o cronômetro zerar.</p>
+
+        <a href="SEU_LINK_AQUI" class="btn-pulsar" id="action-btn">
+            <i class="fab fa-whatsapp"></i>
+            ENTRAR NO GRUPO
+        </a>
+
+        <div class="footer-text">© 2026 • Acesso Privado e Seguro</div>
+    </div>
+
+    <script>
+        function startTimer(duration, display, btn) {
+            let timer = duration, minutes, seconds;
+            let interval = setInterval(function () {
+                minutes = parseInt(timer / 60, 10);
+                seconds = parseInt(timer % 60, 10);
+
+                minutes = minutes < 10 ? "0" + minutes : minutes;
+                seconds = seconds < 10 ? "0" + seconds : seconds;
+
+                display.textContent = minutes + ":" + seconds;
+
+                // Alerta visual aos 30 segundos
+                if (timer <= 30) {
+                    display.classList.add('urgency-blink');
+                }
+
+                // Botão muda para vermelho aos 15 segundos
+                if (timer <= 15) {
+                    btn.classList.add('btn-danger');
+                    btn.innerHTML = '<i class="fas fa-exclamation-triangle"></i> ENTRAR AGORA!';
+                }
+
+                if (--timer < 0) {
+                    clearInterval(interval);
+                    display.textContent = "00:00";
+                    btn.style.opacity = "0.5";
+                    btn.style.pointerEvents = "none";
+                    btn.innerText = "CONVITE EXPIRADO";
+                }
+            }, 1000);
+        }
+
+        window.onload = function () {
+            let sixtySeconds = 60;
+            let display = document.querySelector('#countdown');
+            let btn = document.querySelector('#action-btn');
+            startTimer(sixtySeconds, display, btn);
+        };
+    </script>
+
+</body>
+
+</html>
