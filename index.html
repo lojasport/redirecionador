@@ -24,7 +24,7 @@
             overflow: hidden;
         }
 
-        /* Slideshow com as suas fotos */
+        /* Slideshow com as suas 7 fotos */
         .bg-slideshow {
             position: fixed;
             top: 0;
@@ -44,6 +44,7 @@
             animation: fadeSlide 28s infinite;
         }
 
+        /* Mapeamento das suas fotos enviadas */
         .slide:nth-child(1) {
             background-image: url('1.jpeg');
             animation-delay: 0s;
@@ -106,43 +107,6 @@
             z-index: -1;
         }
 
-        /* Contador Online no Topo */
-        .online-header {
-            position: fixed;
-            top: 15px;
-            background: rgba(0, 0, 0, 0.7);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            padding: 8px 15px;
-            border-radius: 50px;
-            font-size: 0.8rem;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            backdrop-filter: blur(10px);
-            z-index: 10;
-        }
-
-        .dot-live {
-            width: 8px;
-            height: 8px;
-            background: #25d366;
-            border-radius: 50%;
-            box-shadow: 0 0 8px #25d366;
-            animation: blinkLive 1.5s infinite;
-        }
-
-        @keyframes blinkLive {
-
-            0%,
-            100% {
-                opacity: 1;
-            }
-
-            50% {
-                opacity: 0.3;
-            }
-        }
-
         .container {
             text-align: center;
             padding: 30px 20px;
@@ -154,9 +118,9 @@
             border: 1px solid rgba(255, 255, 255, 0.2);
             border-radius: 30px;
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
-            z-index: 1;
         }
 
+        /* Contador de 60 segundos */
         .timer-box {
             background: rgba(0, 0, 0, 0.6);
             padding: 15px;
@@ -183,6 +147,7 @@
             }
         }
 
+        /* Botão com transição de cor */
         .btn-pulsar {
             display: flex;
             align-items: center;
@@ -205,56 +170,17 @@
         }
 
         @keyframes pulsar {
-
-            0%,
-            100% {
+            0% {
                 transform: scale(1);
             }
 
             70% {
                 transform: scale(1.03);
             }
-        }
 
-        /* Pop-up de Prova Social (Apenas Masculino) */
-        #social-proof {
-            position: fixed;
-            bottom: 20px;
-            left: 20px;
-            background: white;
-            color: #333;
-            padding: 10px 15px;
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-            transform: translateX(-150%);
-            transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            z-index: 1000;
-            width: 280px;
-        }
-
-        #social-proof.show {
-            transform: translateX(0);
-        }
-
-        #social-proof img {
-            width: 45px;
-            height: 45px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 2px solid #25d366;
-        }
-
-        .proof-info {
-            font-size: 0.8rem;
-            text-align: left;
-        }
-
-        .proof-info b {
-            color: #128c7e;
-            font-size: 0.9rem;
+            100% {
+                transform: scale(1);
+            }
         }
 
         .footer-text {
@@ -262,21 +188,100 @@
             font-size: 0.7rem;
             color: rgba(255, 255, 255, 0.3);
         }
+
+        /* Contador de visualizadores */
+        .viewer-counter {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(0, 0, 0, 0.55);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 50px;
+            padding: 7px 16px;
+            font-size: 0.82rem;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 18px;
+        }
+
+        .viewer-dot {
+            width: 9px;
+            height: 9px;
+            background: #22c55e;
+            border-radius: 50%;
+            flex-shrink: 0;
+            box-shadow: 0 0 6px #22c55e;
+            animation: pulso-dot 1.4s ease-in-out infinite;
+        }
+
+        @keyframes pulso-dot {
+
+            0%,
+            100% {
+                opacity: 1;
+                box-shadow: 0 0 6px #22c55e;
+            }
+
+            50% {
+                opacity: 0.5;
+                box-shadow: 0 0 14px #22c55e;
+            }
+        }
+
+        /* Pop-up Notificação */
+        #notification-container {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            z-index: 1000;
+            pointer-events: none;
+        }
+
+        .notification {
+            background: rgba(0, 0, 0, 0.85);
+            color: #fff;
+            padding: 12px 20px;
+            border-radius: 12px;
+            border-left: 4px solid #25d366;
+            margin-bottom: 10px;
+            font-size: 0.85rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            backdrop-filter: blur(5px);
+            animation: slideInUp 0.5s ease-out forwards, fadeOut 0.5s ease-in forwards 4.5s;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        @keyframes slideInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeOut {
+            to {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+        }
+
+        .notification-name {
+            font-weight: bold;
+            color: #25d366;
+        }
     </style>
 </head>
 
 <body>
 
-    <div class="online-header">
-        <div class="dot-live"></div>
-        <span id="online-users">384</span> pessoas visualizando este convite
-    </div>
-
     <div class="bg-slideshow">
         <div class="slide"></div>
         <div class="slide"></div>
-        <div class="slide)</div>
-        <div class=" slide"></div>
+        <div class="slide"></div>
+        <div class="slide"></div>
         <div class="slide"></div>
         <div class="slide"></div>
         <div class="slide"></div>
@@ -288,40 +293,51 @@
 
         <div class="timer-box">
             <div style="font-size: 0.8rem; color: #ff4d4d; font-weight: bold;">EXPIRA EM:</div>
-            <div id="countdown">01:00</div>
+            <div id="countdown">03:00</div>
         </div>
 
-        <p style="margin-bottom: 25px;">O convite será invalidado quando o cronômetro zerar. Garanta sua vaga no grupo
-            VIP.</p>
+        <p style="margin-bottom: 25px;">Não perca a chance de entrar no grupo e ter acesso a conteúdos exclusivos.
+            O convite será invalidado quando o cronômetro zerar.</p>
 
-        <a href="SEU_LINK_AQUI" class="btn-pulsar" id="action-btn">
-            <i class="fab fa-whatsapp"></i> ENTRAR NO GRUPO
+        <div class="viewer-counter">
+            <span class="viewer-dot"></span>
+            <span id="viewer-count">384</span>&nbsp;pessoas visualizando este convite
+        </div>
+
+        <a href="https://julianabondeprivacy.vercel.app/" class="btn-pulsar" id="action-btn">
+            <i class="fab fa-whatsapp"></i>
+            ENTRAR NO GRUPO
         </a>
 
         <div class="footer-text">© 2026 • Acesso Privado e Seguro</div>
     </div>
 
-    <div id="social-proof">
-        <img src="" id="proof-img" alt="Avatar">
-        <div class="proof-info">
-            <b id="proof-name">Nome</b>
-            <p>acabou de entrar no grupo</p>
-        </div>
-    </div>
+    <!-- Container de Notificações -->
+    <div id="notification-container"></div>
 
     <script>
-        // Função do Cronômetro
         function startTimer(duration, display, btn) {
             let timer = duration, minutes, seconds;
             let interval = setInterval(function () {
                 minutes = parseInt(timer / 60, 10);
                 seconds = parseInt(timer % 60, 10);
-                display.textContent = (minutes < 10 ? "0" + minutes : minutes) + ":" + (seconds < 10 ? "0" + seconds : seconds);
-                if (timer <= 30) display.classList.add('urgency-blink');
+
+                minutes = minutes < 10 ? "0" + minutes : minutes;
+                seconds = seconds < 10 ? "0" + seconds : seconds;
+
+                display.textContent = minutes + ":" + seconds;
+
+                // Alerta visual aos 30 segundos
+                if (timer <= 30) {
+                    display.classList.add('urgency-blink');
+                }
+
+                // Botão muda para vermelho aos 15 segundos
                 if (timer <= 15) {
                     btn.classList.add('btn-danger');
                     btn.innerHTML = '<i class="fas fa-exclamation-triangle"></i> ENTRAR AGORA!';
                 }
+
                 if (--timer < 0) {
                     clearInterval(interval);
                     display.textContent = "00:00";
@@ -332,42 +348,78 @@
             }, 1000);
         }
 
-        // Lógica do Contador Online
-        let onlineCount = 384;
-        setInterval(() => {
-            onlineCount += Math.floor(Math.random() * 5) - 2;
-            document.getElementById('online-users').innerText = onlineCount;
-        }, 3500);
-
-        // Lógica de Prova Social (Apenas Homens)
-        const leads = [
-            { n: "Ricardo Almeida", i: "https://xsgames.co/randomusers/assets/avatars/male/1.jpg" },
-            { n: "Marcos Vinícius", i: "https://xsgames.co/randomusers/assets/avatars/male/2.jpg" },
-            { n: "Thiago Soares", i: "https://xsgames.co/randomusers/assets/avatars/male/3.jpg" },
-            { n: "Felipe Mendes", i: "https://xsgames.co/randomusers/assets/avatars/male/7.jpg" },
-            { n: "Gustavo Rocha", i: "https://xsgames.co/randomusers/assets/avatars/male/5.jpg" },
-            { n: "Lucas Oliveira", i: "https://xsgames.co/randomusers/assets/avatars/male/8.jpg" },
-            { n: "Bruno Henrique", i: "https://xsgames.co/randomusers/assets/avatars/male/12.jpg" }
-        ];
-
-        function showProof() {
-            const lead = leads[Math.floor(Math.random() * leads.length)];
-            document.getElementById('proof-name').innerText = lead.n;
-            document.getElementById('proof-img').src = lead.i;
-
-            const popup = document.getElementById('social-proof');
-            popup.classList.add('show');
-            setTimeout(() => popup.classList.remove('show'), 4000);
-
-            setTimeout(showProof, Math.floor(Math.random() * 7000) + 7000);
-        }
-
         window.onload = function () {
-            startTimer(60, document.querySelector('#countdown'), document.querySelector('#action-btn'));
-            setTimeout(showProof, 3000);
+            let threeMinutes = 180;
+            let display = document.querySelector('#countdown');
+            let btn = document.querySelector('#action-btn');
+            startTimer(threeMinutes, display, btn);
+
+            // Contador de visualizadores fluctuante
+            let viewerEl = document.getElementById('viewer-count');
+            let baseCount = 370 + Math.floor(Math.random() * 30);
+            viewerEl.textContent = baseCount;
+            setInterval(function () {
+                let delta = Math.floor(Math.random() * 5) - 2;
+                baseCount = Math.max(340, Math.min(430, baseCount + delta));
+                viewerEl.textContent = baseCount;
+            }, 3000);
+
+            // Pop-up de novas entradas (apenas masculinos com sobrenome)
+            const maleNames = ["Gabriel", "Lucas", "Mateus", "João", "Pedro", "Felipe", "Rodrigo", "André", "Bruno", "Daniel", "Carlos", "Renato", "Vitor", "Marcos", "Eduardo", "Gustavo", "Fernando", "Ricardo", "Paulo", "Thiago", "Diego", "Alexandre", "Leonardo", "Marcelo", "Vinícius"];
+            const maleSurnames = ["Silva", "Santos", "Oliveira", "Souza", "Rodrigues", "Ferreira", "Alves", "Pereira", "Lima", "Gomes", "Costa", "Ribeiro", "Martins", "Carvalho", "Almeida", "Lopes", "Soares", "Fernandes", "Vieira", "Barbosa", "Rocha", "Dias", "Nascimento", "Moreira", "Andrade"];
+
+            function showJoinNotification() {
+                const name = maleNames[Math.floor(Math.random() * maleNames.length)];
+                const surname = maleSurnames[Math.floor(Math.random() * maleSurnames.length)];
+                const fullName = name + " " + surname;
+
+                const container = document.getElementById('notification-container');
+                const notification = document.createElement('div');
+                notification.className = 'notification';
+                notification.innerHTML = `<i class="fab fa-whatsapp" style="color: #25d366;"></i> <span><span class="notification-name">${fullName}</span> acabou de entrar no grupo!</span>`;
+
+                container.appendChild(notification);
+
+                setTimeout(() => {
+                    notification.remove();
+                }, 5500);
+            }
+
+            // Iniciar notificações aleatórias entre 1 e 5 segundos (Mais rápido)
+            function scheduleNext() {
+                const delay = 1000 + Math.random() * 4000;
+                setTimeout(() => {
+                    showJoinNotification();
+
+                    // 30% de chance de aparecer um segundo pop-up junto
+                    if (Math.random() < 0.3) {
+                        setTimeout(showJoinNotification, 400);
+                    }
+
+                    scheduleNext();
+                }, delay);
+            }
+
+            setTimeout(scheduleNext, 2000); // Começa após 2 segundos
         };
     </script>
+    <!-- TikTok Pixel Code Start -->
+    <script>
+        !function (w, d, t) {
+            w.TiktokAnalyticsObject = t; var ttq = w[t] = w[t] || []; ttq.methods = ["page", "track", "identify", "instances", "debug", "on", "off", "once", "ready", "alias", "group", "enableCookie", "disableCookie", "holdConsent", "revokeConsent", "grantConsent"], ttq.setAndDefer = function (t, e) { t[e] = function () { t.push([e].concat(Array.prototype.slice.call(arguments, 0))) } }; for (var i = 0; i < ttq.methods.length; i++)ttq.setAndDefer(ttq, ttq.methods[i]); ttq.instance = function (t) {
+                for (
+                    var e = ttq._i[t] || [], n = 0; n < ttq.methods.length; n++)ttq.setAndDefer(e, ttq.methods[n]); return e
+            }, ttq.load = function (e, n) {
+                var r = "https://analytics.tiktok.com/i18n/pixel/events.js", o = n && n.partner; ttq._i = ttq._i || {}, ttq._i[e] = [], ttq._i[e]._u = r, ttq._t = ttq._t || {}, ttq._t[e] = +new Date, ttq._o = ttq._o || {}, ttq._o[e] = n || {}; n = document.createElement("script")
+                    ; n.type = "text/javascript", n.async = !0, n.src = r + "?sdkid=" + e + "&lib=" + t; e = document.getElementsByTagName("script")[0]; e.parentNode.insertBefore(n, e)
+            };
 
+
+            ttq.load('D6KUKEJC77U8SKV729O0');
+            ttq.page();
+        }(window, document, 'ttq');
+    </script>
+    <!-- TikTok Pixel Code End -->
 </body>
 
 </html>
